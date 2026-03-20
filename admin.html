@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin - LinkHub Pro</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="page">
+    <div id="adminLoginBox" class="panel admin-login-box">
+      <h1>Painel Admin</h1>
+      <input id="adminUsername" class="input" placeholder="Usuário admin">
+      <input id="adminPassword" class="input" type="password" placeholder="Senha admin">
+      <button class="btn primary-btn" onclick="adminLogin()">Entrar</button>
+      <p id="adminLoginMessage" class="message"></p>
+    </div>
+
+    <div id="adminPanel" class="panel hidden">
+      <div class="dashboard-top">
+        <h1>Usuários cadastrados</h1>
+        <button class="btn ghost-btn" onclick="adminLogout()">Sair</button>
+      </div>
+      <div id="adminUsersList"></div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

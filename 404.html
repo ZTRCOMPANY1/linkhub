@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Redirecionando...</title>
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      background: #09090f;
+      color: white;
+      font-family: Arial, Helvetica, sans-serif;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .box {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 18px;
+      padding: 24px;
+      max-width: 650px;
+      width: 100%;
+    }
+
+    h1 {
+      margin-top: 0;
+    }
+
+    p {
+      color: #c9d1e8;
+      line-height: 1.6;
+    }
+
+    a {
+      color: #a78bfa;
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h1>Carregando...</h1>
+    <p id="status">Verificando rota.</p>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import {
+      getFirestore,
+      doc,
+      getDoc
+    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyD-Oiz4RXEY4yW6_A3xuLOmsv3mw3urZDU",
+      authDomain: "encurta-67ddd.firebaseapp.com",
+      projectId: "encurta-67ddd",
+      storageBucket: "encurta-67ddd.firebasestorage.app",
+      messagingSenderId: "497432750979",
+      appId: "1:497432750979:web:5454503ebdbf6ac30424b6"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const statusEl = document.getElementById("status");
+
+    function go(url) {
+      window.location.replace(url);
+    }
+
+    function getPathParts() {
+      return window.location.pathname.split("/").filter(Boolean);
+    }
+
+    async function handleEncurtador(parts) {
+      const slug = parts[1];
+
+      if (!slug) {
+        go("/encurtador/");
+        return;
+      }
+
+      statusEl.textContent = "Buscando link curto...";
+
+      try {
+        const ref = doc(db, "short_links", slug);
+        const snap = await getDoc(ref);
+
+        if (!snap.exists()) {
+          statusEl.innerHTML = `
+            Esse link curto não existe.<br><br>
+            <a href="/encurtador/">Voltar ao encurtador</a>
+          `;
+          return;
+        }
+
+        const data = snap.data();
+
+        if (!data.url) {
+          statusEl.innerHTML = `
+            Esse link está inválido.<br><br>
+            <a href="/encurtador/">Voltar ao encurtador</a>
+          `;
+          return;
+        }
+
+        statusEl.textContent = "Destino encontrado. Redirecionando agora...";
+        go(data.url);
+      } catch (error) {
+        console.error(error);
+        statusEl.innerHTML = `
+          Ocorreu um erro ao redirecionar.<br><br>
+          <a href="/encurtador/">Voltar ao encurtador</a>
+        `;
+      }
+    }
+
+    function handleLinkhub(parts) {
+      // /linkhub
+      if (parts.length === 1) {
+        go("/linkhub/");
+        return;
+      }
+
+      // /linkhub/user/slug
+      if (parts.length >= 3 && parts[1] === "user") {
+        const slug = parts[2];
+        go("/linkhub/user.html?slug=" + encodeURIComponent(slug));
+        return;
+      }
+
+      // qualquer outra rota do linkhub
+      go("/linkhub/");
+    }
+
+    function handleAlbum() {
+      go("/album/");
+    }
+
+    function handleDashboard() {
+      go("/dashboard/");
+    }
+
+    async function handleRoute() {
+      const parts = getPathParts();
+
+      if (!parts.length) {
+        statusEl.innerHTML = `
+          Página não encontrada.<br><br>
+          <a href="/">Ir para início</a>
+        `;
+        return;
+      }
+
+      const project = parts[0];
+
+      if (project === "encurtador") {
+        await handleEncurtador(parts);
+        return;
+      }
+
+      if (project === "linkhub") {
+        handleLinkhub(parts);
+        return;
+      }
+
+      if (project === "album") {
+        handleAlbum();
+        return;
+      }
+
+      if (project === "dashboard") {
+        handleDashboard();
+        return;
+      }
+
+      statusEl.innerHTML = `
+        Página não encontrada.<br><br>
+        <a href="/">Ir para início</a>
+      `;
+    }
+
+    handleRoute();
+  </script>
+</body>
+</html>

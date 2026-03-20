@@ -1,0 +1,57 @@
+{
+  "users": [
+    {
+      "id": "1773757862073",
+      "username": "ztremntb",
+      "password": "141219",
+      "slug": "ztremntb",
+      "avatar": "/uploads/default-avatar.png",
+      "bio": "Meu cantinho na internet 🚀",
+      "themeId": "purple",
+      "themeColor": "#7c3aed",
+      "customDomain": "ztrcompany.site",
+      "links": [
+        {
+          "id": "17737578620842",
+          "title": "Instagram",
+          "url": "https://instagram.com/",
+          "icon": "📸",
+          "clicks": 0
+        },
+        {
+          "id": "17737578620841",
+          "title": "YouTube",
+          "url": "https://youtube.com/",
+          "icon": "▶",
+          "clicks": 0
+        },
+        {
+          "id": "17737578620843",
+          "title": "Twitch",
+          "url": "https://twitch.tv/",
+          "icon": "🎮",
+          "clicks": 0
+        },
+        {
+          "id": "17737578620844",
+          "title": "Site pessoal",
+          "url": "https://example.com/",
+          "icon": "🌐",
+          "clicks": 0
+        }
+      ],
+      "analytics": {
+        "visits": 2,
+        "uniqueVisitors": 1,
+        "visitorIPs": [
+          "::1"
+        ],
+        "lastVisitAt": "2026-03-17T14:32:29.470Z"
+      }
+    }
+  ],
+  "admin": {
+    "username": "admin",
+    "password": "admin123"
+  }
+}

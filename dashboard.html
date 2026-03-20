@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - LinkHub Pro</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="page dashboard-page">
+    <div class="dashboard-wrap">
+      <div class="panel">
+        <div class="dashboard-top">
+          <h1>Seu painel</h1>
+          <button class="btn ghost-btn" onclick="logout()">Sair</button>
+        </div>
+
+        <label>Upload real de avatar</label>
+        <input id="avatarFileInput" class="input" type="file" accept="image/*">
+        <button class="btn ghost-btn" onclick="uploadAvatar()">Enviar avatar</button>
+
+        <label>Avatar atual (URL)</label>
+        <input id="avatarInput" class="input" placeholder="URL do avatar">
+
+        <label>Bio</label>
+        <textarea id="bioInput" class="input textarea" placeholder="Escreva sua bio"></textarea>
+
+        <label>Domínio personalizado</label>
+        <input id="customDomainInput" class="input" placeholder="exemplo: bio.seusite.com">
+
+        <label>Tema pronto</label>
+        <select id="themeSelect" class="input">
+          <option value="purple">Purple Neon</option>
+          <option value="blue">Blue Ocean</option>
+          <option value="green">Cyber Green</option>
+          <option value="red">Inferno Red</option>
+        </select>
+
+        <h3>Links</h3>
+        <p class="subtle">Arraste os cards para reordenar.</p>
+        <div id="linksEditor"></div>
+
+        <button class="btn ghost-btn" onclick="addLinkField()">Adicionar link</button>
+        <button class="btn primary-btn" onclick="saveProfile()">Salvar perfil</button>
+        <button class="btn ghost-btn" onclick="copyPublicLink()">Copiar link público</button>
+
+        <p id="saveMessage" class="message"></p>
+      </div>
+
+      <div class="panel preview-panel">
+        <h2>Prévia</h2>
+
+        <div class="analytics-grid">
+          <div class="mini-stat">
+            <strong id="statVisits">0</strong>
+            <span>Visitas</span>
+          </div>
+          <div class="mini-stat">
+            <strong id="statUnique">0</strong>
+            <span>Únicos</span>
+          </div>
+          <div class="mini-stat">
+            <strong id="statClicks">0</strong>
+            <span>Cliques</span>
+          </div>
+        </div>
+
+        <div id="previewCard" class="preview-card">
+          <img id="previewAvatar" class="avatar" src="" alt="Avatar">
+          <h3 id="previewUsername"></h3>
+          <p id="previewBio"></p>
+          <div id="previewLinks" class="links-list"></div>
+        </div>
+
+        <div class="public-url">
+          URL pública:
+          <span id="publicUrl"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

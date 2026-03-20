@@ -1,0 +1,9 @@
+{
+  "name": "link-saas-pro",
+  "version": "2.0.0",
+  "description": "Criador de Links estilo Linktree com admin, analytics e cliques",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  }
+}

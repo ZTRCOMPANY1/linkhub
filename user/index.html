@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Redirecionando...</title>
+  <script>
+    (function () {
+      const parts = window.location.pathname.split("/").filter(Boolean);
+
+      // /linkhub/user/slug
+      if (parts.length >= 3 && parts[0] === "linkhub" && parts[1] === "user") {
+        const slug = parts[2];
+        window.location.replace("/linkhub/user.html?slug=" + encodeURIComponent(slug));
+      } else {
+        window.location.replace("/linkhub/");
+      }
+    })();
+  </script>
+</head>
+<body>
+  Redirecionando...
+</body>
+</html>
